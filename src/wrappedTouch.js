@@ -2,7 +2,7 @@ import  {debounce} from 'lodash';
 import React from 'react';
 import {View,Text} from 'react-native';
 
- const wrappedTouch = (WrappedComponent) => {
+ const wrappedTouch = (WrappedComponent,delayTime=0) => {
 
   class WrappedTouchableComponent extends React.PureComponent {
 
@@ -10,7 +10,7 @@ import {View,Text} from 'react-native';
       this.props.onPress && this.props.onPress();
     }
 
-    onPress = debounce(this.debouncedOnPress, 100, { leading: true, trailing: false });
+    onPress = debounce(this.debouncedOnPress, delayTime , { leading: true, trailing: false });
 
     render() {
       return (
