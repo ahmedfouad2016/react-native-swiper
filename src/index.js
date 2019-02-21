@@ -200,7 +200,7 @@ export default class extends Component {
 
   constructor(props){
     super(props);
-    const TouchableComponent = wrappedTouch(this.props.touchableComponent);
+    this.TouchableComponent = wrappedTouch(props.touchableComponent, Platform.OS == 'ios' ? props.iosButtonDelay : props.androidButtonDelay );
   }
   componentWillReceiveProps (nextProps) {
     if (!nextProps.autoplay && this.autoplayTimer) clearTimeout(this.autoplayTimer)
@@ -586,14 +586,13 @@ export default class extends Component {
       this.state.index !== this.state.total - 1) {
       button = this.props.nextButton || <Text style={styles.buttonText}>›</Text>
     }
-    const TouchableComponent = this.TouchableComponent;
     return (
-      <TouchableComponent
+      <this.TouchableComponent
         onPress={() => button !== null && this.scrollBy(1)}
         disabled={this.props.disableNextButton}
       >
           {button}
-      </TouchableComponent>
+      </this.TouchableComponent>
     )
   }
 
@@ -605,11 +604,11 @@ export default class extends Component {
     }
 
     return (
-      <TouchableOpacity onPress={() => button !== null && this.scrollBy(-1)}>
+      <this.TouchableComponent onPress={() => button !== null && this.scrollBy(-1)}>
         <View>
           {button}
         </View>
-      </TouchableOpacity>
+      </this.TouchableComponent>
     )
   }
 
