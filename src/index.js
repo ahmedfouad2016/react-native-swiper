@@ -140,7 +140,7 @@ export default class extends Component {
     activeDotStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
     dotColor: PropTypes.string,
     activeDotColor: PropTypes.string,
-    touchableComponent: PropTypes.node,
+    touchableComponent:  PropTypes.oneOfType([PropTypes.node,PropTypes.object]),
     iosButtonDelay: PropTypes.number,
     androidButtonDelay: PropTypes.number,
     /**
