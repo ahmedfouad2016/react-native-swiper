@@ -99,6 +99,14 @@ declare module 'react-native-swiper' {
         automaticallyAdjustContentInsets?: boolean
         // Enables/Disables swiping
         scrollEnabled?: boolean
+
+        // controll button TouchableComponent
+        touchableComponent?: JSX.Element
+        // ios delay number (ms) for prevent double click on controlls buttons 
+        iosButtonDelay?: number
+        // ios delay number (ms)for prevent double click on controlls buttons  
+        androidButtonDelay?: number
+
     }
 
     export default class Swiper extends Component<SwiperProps, any> {

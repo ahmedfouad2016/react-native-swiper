@@ -15,7 +15,7 @@ import {
   Platform,
   ActivityIndicator
 } from 'react-native'
-
+import wrappedTouch from './wrappedTouch';
 /**
  * Default styles
  * @type {StyleSheetPropType}
@@ -140,6 +140,9 @@ export default class extends Component {
     activeDotStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
     dotColor: PropTypes.string,
     activeDotColor: PropTypes.string,
+    touchableComponent: PropTypes.node,
+    iosButtonDelay: PropTypes.number,
+    androidButtonDelay: PropTypes.number,
     /**
      * Called when the index has changed because the user swiped.
      */
@@ -170,7 +173,10 @@ export default class extends Component {
     autoplayTimeout: 2.5,
     autoplayDirection: true,
     index: 0,
-    onIndexChanged: () => null
+    onIndexChanged: () => null,
+    touchableComponent: TouchableOpacity,
+    iosButtonDelay: 0,
+    androidButtonDelay: 0
   }
 
   /**
@@ -192,6 +198,10 @@ export default class extends Component {
   autoplayTimer = null
   loopJumpTimer = null
 
+  constructor(props){
+    super(props);
+    const TouchableComponent = wrappedTouch(this.props.touchableComponent);
+  }
   componentWillReceiveProps (nextProps) {
     if (!nextProps.autoplay && this.autoplayTimer) clearTimeout(this.autoplayTimer)
     this.setState(this.initState(nextProps, this.props.index !== nextProps.index))
@@ -576,16 +586,14 @@ export default class extends Component {
       this.state.index !== this.state.total - 1) {
       button = this.props.nextButton || <Text style={styles.buttonText}>›</Text>
     }
-
+    const TouchableComponent = this.TouchableComponent;
     return (
-      <TouchableOpacity
+      <TouchableComponent
         onPress={() => button !== null && this.scrollBy(1)}
         disabled={this.props.disableNextButton}
       >
-        <View>
           {button}
-        </View>
-      </TouchableOpacity>
+      </TouchableComponent>
     )
   }
 
