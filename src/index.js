@@ -597,7 +597,7 @@ export default class extends Component {
         onPress={() => {
           if(button !== null ) {
             this.scrollBy(1,this.props.animated)
-            this.props.onNext();
+            this.props.onNext(this.state);
           }
         }}
         disabled={this.props.disableNextButton}
@@ -618,7 +618,7 @@ export default class extends Component {
       <this.TouchableComponent onPress={() => {
         if (button !== null){
           this.scrollBy(-1,this.props.animated);
-          this.props.onPrev();
+          this.props.onPrev(this.state);
         }
       }}>
         <View>
