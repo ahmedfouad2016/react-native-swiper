@@ -143,6 +143,9 @@ export default class extends Component {
     touchableComponent:  PropTypes.oneOfType([PropTypes.node,PropTypes.object]),
     iosButtonDelay: PropTypes.number,
     androidButtonDelay: PropTypes.number,
+    animated: PropTypes.bool,
+    onNext: PropTypes.func,
+    onPrev: PropTypes.func,
     /**
      * Called when the index has changed because the user swiped.
      */
@@ -176,7 +179,10 @@ export default class extends Component {
     onIndexChanged: () => null,
     touchableComponent: TouchableOpacity,
     iosButtonDelay: 0,
-    androidButtonDelay: 0
+    androidButtonDelay: 0,
+    animated: true,
+    onPrev: () => null,
+    onNext: () => null
   }
 
   /**
@@ -588,7 +594,12 @@ export default class extends Component {
     }
     return (
       <this.TouchableComponent
-        onPress={() => button !== null && this.scrollBy(1)}
+        onPress={() => {
+          if(button !== null ) {
+            this.scrollBy(1,this.props.animated)
+            this.props.onNext();
+          }
+        }}
         disabled={this.props.disableNextButton}
       >
           {button}
@@ -604,7 +615,12 @@ export default class extends Component {
     }
 
     return (
-      <this.TouchableComponent onPress={() => button !== null && this.scrollBy(-1)}>
+      <this.TouchableComponent onPress={() => {
+        if (button !== null){
+          this.scrollBy(-1,this.props.animated);
+          this.props.onPrev();
+        }
+      }}>
         <View>
           {button}
         </View>

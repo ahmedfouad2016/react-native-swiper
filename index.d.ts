@@ -105,7 +105,13 @@ declare module 'react-native-swiper' {
         // ios delay number (ms) for prevent double click on controlls buttons 
         iosButtonDelay?: number
         // ios delay number (ms)for prevent double click on controlls buttons  
-        androidButtonDelay?: number
+        androidButtonDelay?: number,
+        // animted the slider by ddefault true
+        animated?: boolean,
+        // call on next button clicked 
+        onNext?: any,
+        // call when prev button clicked 
+        onPrev?: any
 
     }
 
