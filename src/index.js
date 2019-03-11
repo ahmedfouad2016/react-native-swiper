@@ -146,6 +146,9 @@ export default class extends Component {
     animated: PropTypes.bool,
     onNext: PropTypes.func,
     onPrev: PropTypes.func,
+    firstTempSlide: PropTypes.oneOfType([PropTypes.node,PropTypes.element]),
+    lastTempSlide: PropTypes.oneOfType([PropTypes.node,PropTypes.element]),
+
     /**
      * Called when the index has changed because the user swiped.
      */
@@ -182,7 +185,9 @@ export default class extends Component {
     androidButtonDelay: 0,
     animated: true,
     onPrev: () => null,
-    onNext: () => null
+    onNext: () => null,
+    firstTempSlide: null,
+    lastTempSlide: null
   }
 
   /**
@@ -744,7 +749,27 @@ export default class extends Component {
             )
           }
         } else {
-          return <View style={pageStyle} key={i}>{children[page]}</View>
+          if(loop)
+          {
+            if(i == 0)
+              return(
+                <View style={pageStyle} key={i}>
+                  {this.props.firstTempSlide}
+                </View>
+              )
+            else if(i == pages.length - 1)
+              return(
+                <View style={pageStyle} key={i}>
+                  {this.props.lastTempSlide}
+                </View>
+              )
+            else
+              return <View style={pageStyle} key={i}>{children[page]}</View>
+          }
+          else
+          {
+            return <View style={pageStyle} key={i}>{children[page]}</View>
+          }
         }
       })
     } else {

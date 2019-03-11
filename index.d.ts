@@ -112,6 +112,10 @@ declare module 'react-native-swiper' {
         onNext?: any,
         // call when prev button clicked 
         onPrev?: any
+        // custom first slide in loop (show in darg only)
+        firstTempSlide?: JSX.Element
+        // custom last slide in loop (show in darg only)
+        lastTempSlide?: JSX.Element
 
     }
 
