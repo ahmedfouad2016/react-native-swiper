@@ -754,13 +754,13 @@ export default class extends Component {
             if(i == 0)
               return(
                 <View style={pageStyle} key={i}>
-                  {this.props.firstTempSlide}
+                  {this.props.lastTempSlide}
                 </View>
               )
             else if(i == pages.length - 1)
               return(
                 <View style={pageStyle} key={i}>
-                  {this.props.lastTempSlide}
+                  {this.props.firstTempSlide}
                 </View>
               )
             else
